@@ -1,63 +1,26 @@
-// Mi 1er trabajo practico consta de un sistema que te dice cuanto tiempo de salida le falta a cada comanda en un restaurante.
-
-//
-//
-//
 
 
-/*alert ("Bienvenido al turno, escribe tu nombre");
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("agregar-pedido").addEventListener("click", agregarPedido);
+    document.getElementById("finalizar-pedido").addEventListener("click", finalizarPedido);
+});
 
-const nombre = prompt("ingresa tu nombre");
+let cliente = {
+    nombre: "",
+    edad: "",
+    direccion: ""
+};
+let pedidos = [];
 
+let nombreCafeteria = "Cafetería El Sabor";
 
-if ((nombre == "Josker") || (nombre == "Maria")) {
-    alert ("hola, bienvenido/a " + nombre);
-} else {
-    alert("hola, binevenido/a");
-}
-
-let tiempodesalida;
-
-do{
-    tiempodesalida = parseInt(prompt("ingresa el numero de mesa: \n\n1. mesa 14\n2. mesa 1\n3. mesa 8\n4. mesa 5\n\npara salir, ingresa 0"));
-    
-    switch (tiempodesalida) {
-        case 0:
-            alert("vuelve si necesitas saber el tiempo de tus comandas");
-            break;
-        case 1:
-            alert("tiempo de salida: 8minutos");
-            break;
-        case 2:
-            alert("tiempo de salida: 15minutos");
-            break;
-        case 3:
-            alert("tiempo de salida: 29minutos");
-            break;
-        case 4:
-            alert("tiempo de salida: 35minutos");
-            break;
-        default:
-            alert("la mesa que ingresaste no tiene pedidos, intentalo de nuevo");
-            break;
-    }
-} while(tiempodesalida !== 0);
-
-//Si no es problema, dejé la primera pre-entrega ahí arriba, ya que quise probar haciendo algo diferente para la segunda pre-entrega. 
-
-/**  Mi 2do trabajo practico consta de un autoservicio a traves de la app (tipo automac pero a traves de autoservicio)*/ 
-
+let menu = {
+    cafe: { precio: 2.5, imagen: "cafe.jpg" },
+    te: { precio: 1.8, imagen: "te.jpg" },
+    pastel: { precio: 3.0, imagen: "pastel.jpg" }
+};
 
 function procesarPedido(pedidos, cliente) {
-
-    let nombreCafeteria = "Cafetería El Sabor";
-
-    let menu = {
-        cafe: 2.5,
-        te: 1.8,
-        pastel: 3.0
-    };
-
     alert("¡Bienvenido a " + nombreCafeteria + "! Por favor, elija su pedido.");
 
     let historialPedidos = [];
@@ -65,13 +28,12 @@ function procesarPedido(pedidos, cliente) {
     let total = 0;
     pedidos.forEach(function(pedido) {
         if (pedido.toLowerCase() in menu) {
-            total += menu[pedido.toLowerCase()];
-            historialPedidos.push({ producto: pedido, precio: menu[pedido.toLowerCase()] });
+            total += menu[pedido.toLowerCase()].precio;
+            historialPedidos.push({ producto: pedido, precio: menu[pedido.toLowerCase()].precio });
         } else {
             alert("Lo siento, no tenemos " + pedido + " en el menú.");
         }
     });
-
 
     function calcularTotalConImpuestos(subtotal) {
         const impuesto = 0.1; // 10% de impuesto
@@ -79,34 +41,85 @@ function procesarPedido(pedidos, cliente) {
     }
 
     function imprimirFactura(cliente, historial, total) {
-        console.log("Cliente: " + cliente.nombre);
-        console.log("Edad: " + cliente.edad);
-        console.log("Dirección: " + cliente.direccion);
-        console.log("Historial de Pedidos:");
-        historial.forEach(function(pedido, index) {
-            console.log((index + 1) + ". " + pedido.producto + ": $" + pedido.precio.toFixed(2));
+        let facturaHTML = "<h2>Factura</h2>" +
+            "<p><strong>Cliente:</strong> " + cliente.nombre + "</p>" +
+            "<p><strong>Edad:</strong> " + cliente.edad + "</p>" +
+            "<p><strong>Dirección:</strong> " + cliente.direccion + "</p>" +
+            "<div id='historialPedidos'>" +
+            "<h2>Historial de Pedidos</h2>" +
+            "<table>" +
+            "<thead>" +
+            "<tr>" +
+            "<th>Producto</th>" +
+            "<th>Precio</th>" +
+            "<th>Imagen</th>" +
+            "</tr>" +
+            "</thead>" +
+            "<tbody>";
+        
+        historial.forEach(function(pedido) {
+            facturaHTML += "<tr>" +
+                "<td>" + pedido.producto + "</td>" +
+                "<td>$" + pedido.precio.toFixed(2) + "</td>" +
+                "<td><img src='" + menu[pedido.producto.toLowerCase()].imagen + "' alt='" + pedido.producto + "'></td>" +
+                "</tr>";
         });
-        console.log("Total (con impuestos): $" + calcularTotalConImpuestos(total).toFixed(2));
+        
+        facturaHTML += "</tbody>" +
+            "</table>" +
+            "</div>" +
+            "<p><strong>Total (con impuestos):</strong> $" + calcularTotalConImpuestos(total).toFixed(2) + "</p>" +
+            "<h3>Detalle de Productos y Precios:</h3>" +
+            "<table>" +
+            "<thead>" +
+            "<tr>" +
+            "<th>Producto</th>" +
+            "<th>Precio</th>" +
+            "</tr>" +
+            "</thead>" +
+            "<tbody>";
+        
+        for (let item in menu) {
+            facturaHTML += "<tr>" +
+                "<td>" + item + "</td>" +
+                "<td>$" + menu[item].precio.toFixed(2) + "</td>" +
+                "</tr>";
+        }
+        
+        facturaHTML += "</tbody>" +
+            "</table>";
+        
+        document.getElementById("factura").innerHTML = facturaHTML;
     }
 
-    imprimirFactura(cliente, historialPedidos, total);
+    // JSON
+    let facturaJSON = JSON.stringify({ cliente: cliente, historial: historialPedidos, total: calcularTotalConImpuestos(total).toFixed(2) });
+    console.log("Factura en formato JSON:");
+    console.log(facturaJSON);
+
+    // Storage
+    localStorage.setItem("factura", facturaJSON);
 }
 
-let cliente = {
-    nombre: prompt("Ingrese su nombre"),
-    edad: parseInt(prompt("Ingrese su edad")),
-    direccion: prompt("Ingrese su dirección")
-};
-let pedidos = [];
-let seguirPedido = true;
-
-while (seguirPedido) {
-    let pedido = prompt("¿Qué le gustaría ordenar? (cafe, te, pastel)\nPara terminar de pedir, escriba '0'");
-    if (pedido.toLowerCase() === "0") {
-        seguirPedido = false;
-    } else {
-        pedidos.push(pedido);
-    }
+function agregarPedido() {
+    let pedido = document.getElementById("pedido").value;
+    pedidos.push(pedido);
+    procesarPedido(pedidos, cliente);
 }
 
-procesarPedido(pedidos, cliente);
+function finalizarPedido() {
+    procesarPedido(pedidos, cliente);
+
+    let resumenCompra = "<h2>Resumen de la Compra</h2>" +
+        "<p>Gracias por su compra, " + cliente.nombre + "!</p>" +
+        "<p>Resumen de su pedido:</p>" +
+        "<ul>";
+
+    pedidos.forEach(function(pedido) {
+        resumenCompra += "<li>" + pedido + "</li>";
+    });
+
+    resumenCompra += "</ul>";
+
+    document.getElementById("resumenCompra").innerHTML = resumenCompra;
+}
