@@ -1,82 +1,213 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
+* {
     margin: 0;
-    padding: 0;
+    font-family: sans-serif;
 }
 
-.container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.logoprincipal {
+    height: 50px;
 }
 
-h1 {
+header {
+    background-color: #F9F9F9;
+    padding: 10px 0;
+}
+
+.navbar-brand img {
+    width: 10px;
+}
+
+.navbar-toggler {
+    background-color: #333;
+    border: none;
+}
+
+.navbar-toggler:focus {
+    outline: none;
+}
+
+.navbar-nav .nav-link {
     color: #333;
-    text-align: center;
-}
-
-p {
-    color: #666;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-label {
     font-weight: bold;
-    color: #333;
 }
 
-input[type="text"],
-input[type="number"],
-select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link:hover {
+    color: #4CAF50;
+}
+
+
+.logobanner {
+    margin: 2.5rem;
+    height: 10rem;
+}
+
+.container-banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 10%;
+}
+
+/* .img-productos {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.card-productos {
+    width: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: solid black 2px;
+    padding: 1rem;
+    margin: 5px auto;
+}
+
+.card-productos h2 {
     font-size: 16px;
 }
 
-button {
-    padding: 10px 20px;
-    background-color: #4caf50;
-    color: #fff;
+.nombre {
+    text-align: center;
+}
+
+#nuestros-productos {
+    text-align: center;
+}
+
+#container-productos {
+    display: flex;
+    flex-wrap: wrap;
+} */
+
+/* .img-carrito {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.card-carrito {
+    width: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: solid black 2px;
+    padding: 1rem;
+    margin: 5px auto;
+} */
+
+
+#container-productos {
+    height: 10px !important;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card-productos {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+.nombre {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.img-productos {
+    width: 10%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.precio {
+    margin-bottom: 10px;
+}
+
+.boton-productos {
+    background-color: #4CAF50;
     border: none;
+    color: white;
+    padding: 8px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin-top: 10px;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
 }
 
-button:hover {
-    background-color: #45a049;
+
+#container-carrito {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
 }
 
-.factura-container {
-    margin-top: 30px;
-    border-top: 2px solid #ccc;
-    padding-top: 20px;
+.card-carrito {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 30px;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
+.nombre-carrito {
+    font-size: 18px;
+    margin-bottom: 5px;
 }
 
-table, th, td {
-    border: 1px solid #ddd;
+.img-carrito {
+    width: 10%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
 }
 
-th, td {
-    padding: 8px;
-    text-align: left;
-}
-
-th {
-    background-color: #f2f2f2;
+.precio-carrito {
     font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.cantidad-carrito {
+    margin-bottom: 5px;
+}
+
+.boton-carrito {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.total {
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.tituloTotal {
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 18px;
 }
