@@ -76,3 +76,15 @@ function quitarDelCarrito(id) {
         mostrarProductosCarrito(carrito);
     }
 }
+
+const botonComprafinal = document.createElement("button");
+botonComprafinal.innerText = "Fin de compra";
+botonComprafinal.onclick = () => Swal.fire({
+    position: "center",
+    icon: "success",
+    title: "Gracias por tu compra :) . Espera a ser llamado",
+    showConfirmButton: false,
+    timer: 1500
+})
+
+document.body.appendChild(botonComprafinal);

@@ -1,3 +1,4 @@
+
 const productos = [
 
     {
@@ -24,4 +25,5 @@ const productos = [
         "cantidad": 1,
     },
 
-]
+];
+

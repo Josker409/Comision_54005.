@@ -5,6 +5,18 @@ const titulo = document.getElementById("nuestros-productos");
 
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
+
+// La función pedirProductos va a EMULAR el pedido de productos a la Base de Datos.
+
+const pedirProductos = () => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(productos)
+        }, 1000);
+    });
+};
+
+
 function mostrarProductos(productos) {
 
     productos.forEach(el => {
@@ -53,3 +65,17 @@ function agregarAlCarrito(id) {
     }
     localStorage.setItem("carrito", JSON.stringify(carrito));
 }
+
+
+// ------------ De acá para abajo está prohibido usar BD directamente.
+
+pedirProductos()
+.then((response) => {
+    console.log("RESUELTO", response)
+    setTimeout(() => {
+        
+        const loader = document.getElementById("loader");
+        loader.remove();
+        response.forEach(el => crearCard(el));
+    }, 100);
+});
