@@ -2,20 +2,39 @@ const container = document.getElementById("container-productos");
 
 const titulo = document.getElementById("nuestros-productos");
 
+//
+
+const productos = [
+
+    {
+        "codigo": 1,
+        "nombre": "cafe",
+        "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/A_small_cup_of_coffee.JPG/1000px-A_small_cup_of_coffee.JPG",
+        "precio": 2900,
+        "cantidad": 1,
+    },
+
+    {
+        "codigo": 2,
+        "nombre": "torta chocolate",
+        "imagen": "https://cdn2.cocinadelirante.com/sites/default/files/images/2023/08/receta-de-pastel-de-chocolate-facil.jpg",
+        "precio": 2000,
+        "cantidad": 1,
+    },
+
+    {
+        "codigo": 3,
+        "nombre": "te frio",
+        "imagen": "https://www.comedera.com/wp-content/uploads/2022/04/te-frio.jpg",
+        "precio": 2500,
+        "cantidad": 1,
+    },
+
+]
+
+//
 
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-
-
-// La función pedirProductos va a EMULAR el pedido de productos a la Base de Datos.
-
-const pedirProductos = () => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(productos)
-        }, 1000);
-    });
-};
-
 
 function mostrarProductos(productos) {
 
@@ -67,15 +86,3 @@ function agregarAlCarrito(id) {
 }
 
 
-// ------------ De acá para abajo está prohibido usar BD directamente.
-
-pedirProductos()
-.then((response) => {
-    console.log("RESUELTO", response)
-    setTimeout(() => {
-        
-        const loader = document.getElementById("loader");
-        loader.remove();
-        response.forEach(el => crearCard(el));
-    }, 100);
-});

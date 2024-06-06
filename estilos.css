@@ -212,7 +212,7 @@ header {
     font-size: 18px;
 }
 
-.loader {
+/* .loader {
     width: 10rem;
     height: 10rem;
     border-radius: 50%;
@@ -261,4 +261,4 @@ header {
     100% {
         clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%)
     }
-}
+} */
